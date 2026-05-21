@@ -2,9 +2,11 @@ from fastapi import FastAPI
 
 from app.core.config import settings
 from app.api.routes.health import router as health_router
+from app.api.routes.upload import router as upload_router
+
 from app.database.init_db import create_tables
 
-# Create database tables
+# Create tables
 create_tables()
 
 app = FastAPI(
@@ -14,10 +16,10 @@ app = FastAPI(
 
 # Register routes
 app.include_router(health_router)
+app.include_router(upload_router)
 
 @app.get("/")
 def root():
     return {
         "message": f"{settings.APP_NAME} is running"
     }
-
