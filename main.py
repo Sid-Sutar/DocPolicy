@@ -2,13 +2,17 @@ from fastapi import FastAPI
 
 from app.core.config import settings
 from app.api.routes.health import router as health_router
+from app.database.init_db import create_tables
+
+# Create database tables
+create_tables()
 
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION
 )
 
-# Include routes
+# Register routes
 app.include_router(health_router)
 
 @app.get("/")
