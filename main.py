@@ -38,11 +38,15 @@ from app.api.routes.agent import (
     router as agent_router
 )
 
+from app.api.routes.summary import (
+    router as summary_router
+)
+
 from app.database.init_db import (
     create_tables
 )
 
-# Create DB tables
+# Create database tables
 create_tables()
 
 app = FastAPI(
@@ -66,6 +70,7 @@ app.include_router(search_router)
 app.include_router(rag_router)
 app.include_router(risk_router)
 app.include_router(agent_router)
+app.include_router(summary_router)
 
 @app.get("/")
 def root():
