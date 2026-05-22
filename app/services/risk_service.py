@@ -7,21 +7,27 @@ def analyze_contract_risks(
 ):
 
     risk_prompt = """
-Analyze the provided contract clauses and identify risks.
+Analyze the provided contract clauses carefully.
 
-Return analysis in this format:
+Return ONLY structured analysis in this format:
 
-1. Risk Type
-2. Risk Level (LOW/MEDIUM/HIGH)
-3. Explanation
-4. Recommendation
+[
+    {
+        "risk_type": "...",
+        "risk_level": "...",
+        "explanation": "...",
+        "recommendation": "..."
+    }
+]
 
 Focus on:
 - liability risks
 - termination risks
-- payment issues
-- confidentiality concerns
-- compliance problems
+- payment risks
+- confidentiality issues
+- compliance concerns
+
+Be concise and professional.
 """
 
     response = generate_rag_response(
