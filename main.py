@@ -8,6 +8,8 @@ from app.api.routes.extract import router as extract_router
 from app.api.routes.chunk import router as chunk_router
 from app.api.routes.embed import router as embed_router
 from app.api.routes.search import router as search_router
+from app.api.routes.rag import router as rag_router
+
 
 
 
@@ -29,6 +31,9 @@ app.include_router(extract_router)
 app.include_router(chunk_router)
 app.include_router(embed_router)
 app.include_router(search_router)
+app.include_router(rag_router)
+
+
 
 
 
