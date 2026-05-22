@@ -1,33 +1,41 @@
 import ollama
 
-MODEL_NAME = "gemma:2b"
+from app.core.logger import logger
 
 def generate_rag_response(
     query,
     context_chunks
 ):
 
-    context = "\n\n".join(context_chunks)
+    logger.info(
+        "Generating LLM response"
+    )
+
+    combined_context = "\n\n".join(
+        context_chunks
+    )
 
     prompt = f"""
-You are an AI Contract Risk Intelligence Assistant.
+You are an AI Contract Intelligence Assistant.
 
-Use ONLY the provided contract context to answer the user question.
+RULES:
+- Answer briefly and clearly
+- Do NOT repeat information
+- Keep answers under 200 words
+- Use only relevant context
+- Be professional and concise
 
-If the answer is not found in the context, say:
-"I could not find relevant information in the contract."
+Context:
+{combined_context}
 
-CONTRACT CONTEXT:
-{context}
-
-USER QUESTION:
+Question:
 {query}
 
-ANSWER:
+Answer:
 """
 
     response = ollama.chat(
-        model=MODEL_NAME,
+        model="phi3:mini",
         messages=[
             {
                 "role": "user",
@@ -36,4 +44,11 @@ ANSWER:
         ]
     )
 
-    return response["message"]["content"]
+    answer = response["message"]["content"]
+
+    logger.info(
+        "LLM response generated"
+    )
+
+    return answer
+

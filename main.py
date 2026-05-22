@@ -46,11 +46,19 @@ from app.api.routes.multi_doc import (
     router as multi_doc_router
 )
 
+from app.api.routes.citation import (
+    router as citation_router
+)
+
+from app.api.routes.chat import (
+    router as chat_router
+)
+
 from app.database.init_db import (
     create_tables
 )
 
-# Create database tables
+# Create DB tables
 create_tables()
 
 app = FastAPI(
@@ -76,6 +84,8 @@ app.include_router(risk_router)
 app.include_router(agent_router)
 app.include_router(summary_router)
 app.include_router(multi_doc_router)
+app.include_router(citation_router)
+app.include_router(chat_router)
 
 @app.get("/")
 def root():
@@ -84,4 +94,3 @@ def root():
         "message":
         f"{settings.APP_NAME} is running"
     }
-
