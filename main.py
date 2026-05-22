@@ -54,6 +54,10 @@ from app.api.routes.chat import (
     router as chat_router
 )
 
+from app.api.routes.orchestrator import (
+    router as orchestrator_router
+)
+
 from app.database.init_db import (
     create_tables
 )
@@ -86,6 +90,7 @@ app.include_router(summary_router)
 app.include_router(multi_doc_router)
 app.include_router(citation_router)
 app.include_router(chat_router)
+app.include_router(orchestrator_router)
 
 @app.get("/")
 def root():
